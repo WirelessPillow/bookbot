@@ -1,11 +1,4 @@
 import sys
-print("Usage: python3 main.py <path_to_book>")
-sys.exit(1)
-
-def get_book_texts(text):
-    with open(text) as book:
-        output = book.read()
-    return output
 
 from stats import count_words
 
@@ -13,8 +6,16 @@ from stats import count_characters
 
 from stats import sorted_characters
 
+def get_book_texts(text):
+    with open(text) as book:
+        output = book.read()
+    return output
+
 def main():
-    book_path = sys.argv(1)
+    if len(sys.argv) != 2:
+            print("Usage: python3 main.py <path_to_book>")
+            sys.exit(1)
+    book_path = sys.argv[1]
     book_content = (get_book_texts(book_path))
     total_words = count_words(book_content)
     book_char_counts = count_characters(book_content)
@@ -29,4 +30,3 @@ def main():
             print(f"{char['char']}: {char['num']}")
     print("============= END ===============")
 main()
-print(sys.argv)
